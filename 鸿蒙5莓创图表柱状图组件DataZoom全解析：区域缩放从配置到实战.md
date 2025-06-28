@@ -1,100 +1,115 @@
-# 鸿蒙5莓创图表柱状图组件DataZoom全解析：区域缩放从配置到实战
+# HarmonyOS 5 Meichuang Charts Bar Chart Component DataZoom Comprehensive Analysis: From Configuration to Practice
 
-大家好，欢迎回来鸿蒙5莓创图表组件的专场，我们这一期来讲解区域缩放（dataZoom）功能的详细用法。区域缩放是数据可视化中非常实用的功能，能帮助用户聚焦特定区间的数据，尤其适合处理大量数据或需要细节分析的场景。下面将从属性作用、类型、默认值、可选范围、适用场景和代码案例六个维度，逐一展开说明。
+Hello everyone, welcome back to the special session of HarmonyOS 5 Meichuang chart components. In this issue, we will explain the detailed usage of the area zoom (dataZoom) function. Area zoom is a very practical function in data visualization, which can help users focus on data in a specific interval, especially suitable for scenarios dealing with large amounts of data or requiring detailed analysis. The following will be explained one by one from six dimensions: attribute function, type, default value, optional range, applicable scenarios, and code examples.
 
-* * *
 
-### 一、show 属性
+### 一、show Attribute
 
-作用：控制区域缩放组件的显示与隐藏 类型：Boolean（布尔值） 默认值：false（默认不显示） 可选值：true（显示）/ false（隐藏） 使用场景：当数据量较大（如超过10条）时，建议开启此功能，允许用户通过滑动或捏合手势缩放查看局部数据。 代码案例：
-
+**Function**: Control the display and hiding of the area zoom component  
+**Type**: Boolean  
+**Default Value**: false (not displayed by default)  
+**Optional Values**: true (display) / false (hide)  
+**Usage Scenario**: When the data volume is large (such as more than 10 items), it is recommended to enable this function, allowing users to zoom in and view local data through sliding or pinching gestures.  
+**Code Example**:
 ```
 dataZoom: {
-  show: true,  // 开启区域缩放组件
+  show: true,  // Enable the area zoom component
   start: 2,
   end: 8
 }
 ```
 
-* * *
 
-### 二、start 属性
+### 二、start Attribute
 
-作用：设置区域缩放初始显示范围的起始下标 类型：Number（数值类型） 默认值：0（从第1条数据开始） 可选范围：0 到数据总长度减1的整数 使用场景：需要默认展示数据中间部分时（如跳过前几条异常数据），可通过设置 start 指定起始位置。 代码案例：
-
+**Function**: Set the starting index of the initial display range of the area zoom  
+**Type**: Number  
+**Default Value**: 0 (start from the first data item)  
+**Optional Range**: Integers from 0 to the total data length minus 1  
+**Usage Scenario**: When you need to display the middle part of the data by default (such as skipping the first few abnormal data), you can specify the starting position by setting start.  
+**Code Example**:
 ```
 dataZoom: {
   show: true,
-  start: 3,     // 从第4条数据开始显示
+  start: 3,     // Start displaying from the 4th data item
   end: 10
 }
 ```
 
-* * *
 
-### 三、end 属性
+### 三、end Attribute
 
-作用：设置区域缩放初始显示范围的结束下标 类型：Number（数值类型） 默认值：6（默认显示前7条数据） 可选范围：必须大于 start 的数值，且不超过数据总长度 使用场景：结合 start 属性实现"默认聚焦某段数据"，如展示最近7天数据中的中间5天。 代码案例：
-
+**Function**: Set the ending index of the initial display range of the area zoom  
+**Type**: Number  
+**Default Value**: 6 (display the first 7 data items by default)  
+**Optional Range**: A value must be greater than start and not exceed the total data length  
+**Usage Scenario**: Combine with the start attribute to achieve "default focus on a certain segment of data", such as displaying the middle 5 days of the recent 7 days of data.  
+**Code Example**:
 ```
 dataZoom: {
   show: true,
   start: 5,
-  end: 11      // 显示第6到第12条数据
+  end: 11      // Display the 6th to 12th data items
 }
 ```
 
-* * *
 
-### 四、velocity 属性
+### 四、velocity Attribute
 
-作用：控制手动滑动时的滚动速度 类型：Number（数值类型） 默认值：0（采用组件内置的默认速度） 可选范围：建议 0~1 之间的浮点数，数值越大滚动越快 使用场景：当数据量极大（如1000条以上）时，适当提高速度可提升交互体验。 代码案例：
-
+**Function**: Control the scrolling speed during manual sliding  
+**Type**: Number  
+**Default Value**: 0 (use the built-in default speed of the component)  
+**Optional Range**: It is recommended to use floating-point numbers between 0 and 1. The larger the value, the faster the scrolling.  
+**Usage Scenario**: When the data volume is extremely large (such as more than 1000 items), appropriately increasing the speed can improve the interaction experience.  
+**Code Example**:
 ```
 dataZoom: {
   show: true,
-  velocity: 0.5  // 中等滚动速度
+  velocity: 0.5  // Medium scrolling speed
 }
 ```
 
-* * *
 
-### 五、num 属性
+### 五、num Attribute
 
-作用：限制可视区域最大显示的数据条目数量 类型：Number（数值类型） 默认值：0（自动根据容器宽度计算） 可选范围：大于等于1的整数 使用场景：强制约束显示条目数（如仪表盘场景下固定显示7条），避免因容器尺寸变化导致显示条目波动。 代码案例：
-
+**Function**: Limit the maximum number of data entries displayed in the visible area  
+**Type**: Number  
+**Default Value**: 0 (automatically calculated based on the container width)  
+**Optional Range**: Integers greater than or equal to 1  
+**Usage Scenario**: Forcefully constrain the number of displayed entries (such as fixing 7 entries in the dashboard scenario) to avoid fluctuations in the number of displayed entries due to changes in the container size.  
+**Code Example**:
 ```
 dataZoom: {
   show: true,
-  num: 7        // 无论缩放如何操作，最多显示7条
+  num: 7        // No matter how you zoom, at most 7 entries are displayed
 }
 ```
 
-* * *
 
-### 六、完整综合案例
+### 六、Complete Comprehensive Case
 
 ```
 @State dataZoomOption: Options = new Options({
   xAxis: {
-    data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
+    data: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
   },
   dataZoom: {
-    show: true,        // 启用缩放
-    start: 3,          // 默认从4月开始
-    end: 8,            // 默认显示到9月
-    velocity: 0.3,     // 平缓滚动速度
-    num: 6             // 最多显示6个月
+    show: true,        // Enable zoom
+    start: 3,          // Default start from April
+    end: 8,            // Default display until September
+    velocity: 0.3,     // Gentle scrolling speed
+    num: 6             // At most 6 months are displayed
   },
   series: [{
-    name: '销售额',
+    name: 'Sales',
     data: [120, 200, 150, 80, 70, 110, 130, 180, 95, 88, 160, 210]
   }]
 })
 ```
 
-效果说明：默认展示4-9月的数据，用户可通过滑动查看其他月份，但无论如何缩放，界面最多同时显示6个月份的数据，滑动过程具有平滑的动画效果。
+**Effect Description**: By default, the data from April to September is displayed. Users can slide to view other months, but no matter how they zoom, the interface displays at most 6 months of data at the same time, and the sliding process has a smooth animation effect.
 
-* * *
 
-好，这期讲到这里就结束了，希望大家能通过dataZoom组件实现更灵活的数据展示控制。如果在实际使用中遇到边界值问题，记得重点检查start/end的取值范围是否合法。下期我们将深入讲解动态数据更新的高级技巧，敬请期待！
+### Conclusion
+
+This issue ends here. I hope you can use the dataZoom component to achieve more flexible data display control. If you encounter boundary value problems in actual use, remember to check whether the value range of start/end is legal. In the next issue, we will deeply explain the advanced skills of dynamic data update. Stay tuned!
